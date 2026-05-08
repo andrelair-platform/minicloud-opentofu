@@ -11,6 +11,17 @@ The cluster is live, so the workflow here is **import-then-plan-clean**, not
 `tofu apply` from scratch. The proof of correctness is `tofu plan` returning
 "No changes. Your infrastructure matches the configuration."
 
+**Live docs:** <https://andrelair-platform.github.io/minicloud-platform-docs/>
+— see [Phase 11 — OpenTofu (MAAS)](https://andrelair-platform.github.io/minicloud-platform-docs/iac/terraform) for the full
+walkthrough including the import-plan loop and the deferral rationale for
+Crossplane.
+
+**Sibling repos in the [andrelair-platform](https://github.com/andrelair-platform) org:**
+[docs](https://github.com/andrelair-platform/minicloud-platform-docs) ·
+[ansible](https://github.com/andrelair-platform/minicloud-ansible) ·
+[gitops](https://github.com/andrelair-platform/minicloud-gitops) ·
+[platform-demo](https://github.com/andrelair-platform/platform-demo)
+
 ---
 
 ## Layout
