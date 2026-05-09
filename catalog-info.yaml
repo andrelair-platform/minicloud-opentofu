@@ -1,0 +1,33 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: minicloud-opentofu
+  description: |
+    Phase 11 — OpenTofu (Terraform fork) configuration for MAAS-side
+    state. Codifies the cluster subnet, DHCP IP range, and 3 machines
+    using the canonical/maas provider. Brought existing brownfield
+    resources under management via tofu import; tofu plan reports
+    "No changes" against the live MAAS controller. State file local +
+    gitignored (Vault-backed remote state deferred to a future phase).
+  annotations:
+    backstage.io/source-location: url:https://github.com/andrelair-platform/minicloud-opentofu
+    github.com/project-slug: andrelair-platform/minicloud-opentofu
+  tags:
+    - opentofu
+    - terraform
+    - iac
+    - maas
+    - phase-11
+  links:
+    - url: https://andrelair-platform.github.io/minicloud-platform-docs/iac/terraform
+      title: Phase 11 documentation
+      icon: docs
+    - url: https://github.com/andrelair-platform/minicloud-opentofu
+      title: Source code
+      icon: github
+spec:
+  type: tool
+  lifecycle: production
+  owner: andrelair-platform
+  system: minicloud-platform
