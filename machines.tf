@@ -8,9 +8,10 @@
 
 locals {
   cluster_machines = {
-    set-hog    = { hostname = "set-hog",    ip = "10.0.0.2", role = "control-plane" }
-    fast-skunk = { hostname = "fast-skunk", ip = "10.0.0.4", role = "worker" }
-    fast-heron = { hostname = "fast-heron", ip = "10.0.0.7", role = "worker" }
+    set-hog     = { hostname = "set-hog",     ip = "10.0.0.2", role = "control-plane" }
+    fast-skunk  = { hostname = "fast-skunk",  ip = "10.0.0.4", role = "worker" }
+    fast-heron  = { hostname = "fast-heron",  ip = "10.0.0.7", role = "worker" }
+    star-kitten = { hostname = "star-kitten", ip = "10.0.0.8", role = "worker" }
   }
 }
 
