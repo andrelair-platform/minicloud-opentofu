@@ -13,11 +13,6 @@ locals {
     fast-heron  = { hostname = "fast-heron",  ip = "10.0.0.7", role = "worker" }
     star-kitten = { hostname = "star-kitten", ip = "10.0.0.8", role = "worker" }
   }
-
-  # ARM64 nodes cannot PXE boot via MAAS — managed manually, documented here for inventory.
-  non_maas_machines = {
-    jetson-orin = { hostname = "jetson-orin", ip = "10.0.0.9", role = "gpu-worker", arch = "arm64", notes = "NVIDIA Jetson Orin Nano 8GB, JetPack 6.2, SD card boot" }
-  }
 }
 
 resource "maas_machine" "cluster" {
