@@ -1,7 +1,11 @@
 # minicloud — OpenTofu (MAAS)
 
-Codifies the **MAAS-managed infrastructure** for the 3-node minicloud
-cluster: cluster subnet, DHCP range, and the 3 machines.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![OpenTofu](https://img.shields.io/badge/OpenTofu-%E2%89%A51.10-purple)](https://opentofu.org)
+[![Live docs](https://img.shields.io/badge/docs-live-blue)](https://andrelair-platform.github.io/minicloud-platform-docs/)
+
+Codifies the **MAAS-managed infrastructure** for the minicloud
+cluster: cluster subnet, DHCP range, and the machines.
 
 This is the layer below Phase 10's Ansible roles. Ansible codifies what
 runs *on* a node; this OpenTofu codifies the MAAS-side state that makes a
@@ -21,6 +25,19 @@ Crossplane.
 [ansible](https://github.com/andrelair-platform/minicloud-ansible) ·
 [gitops](https://github.com/andrelair-platform/minicloud-gitops) ·
 [platform-demo](https://github.com/andrelair-platform/platform-demo)
+
+---
+
+## Table of Contents
+
+- [Layout](#layout)
+- [Prerequisites](#prerequisites)
+- [Run](#run)
+- [Importing existing state](#importing-existing-state)
+- [The import-plan loop](#the-import-plan-loop)
+- [When (and when not) to `tofu apply`](#when-and-when-not-to-tofu-apply)
+- [Troubleshooting](#troubleshooting)
+- [What this repo deliberately does NOT manage](#what-this-repo-deliberately-does-not-manage)
 
 ---
 
