@@ -10,7 +10,7 @@
 #   tofu import aws_lightsail_static_ip_attachment.coturn minicloud-coturn-ip
 
 resource "aws_lightsail_instance" "coturn" {
-  name              = "minicloud-coturn"
+  name              = "turn-coturn-eu"
   availability_zone = "${var.aws_region}a"
   blueprint_id      = "ubuntu_22_04"
   bundle_id         = "nano_3_0" # 512 MB RAM, 1 vCPU, 20 GB SSD, 1 TB transfer
@@ -24,7 +24,7 @@ resource "aws_lightsail_instance" "coturn" {
 }
 
 resource "aws_lightsail_static_ip" "coturn" {
-  name = "minicloud-coturn-ip"
+  name = "turn-coturn-ip"
 }
 
 resource "aws_lightsail_static_ip_attachment" "coturn" {
@@ -79,3 +79,8 @@ output "coturn_instance_name" {
   description = "Lightsail instance name"
   value       = aws_lightsail_instance.coturn.name
 }
+
+# ── Import commands (run once to bring existing resources under OpenTofu) ─────
+# tofu import aws_lightsail_instance.coturn turn-coturn-eu
+# tofu import aws_lightsail_static_ip.coturn turn-coturn-ip
+# tofu import aws_lightsail_static_ip_attachment.coturn turn-coturn-ip
