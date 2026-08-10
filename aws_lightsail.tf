@@ -14,6 +14,7 @@ resource "aws_lightsail_instance" "coturn" {
   availability_zone = "${var.aws_region}a"
   blueprint_id      = "ubuntu_22_04"
   bundle_id         = "nano_3_0" # 512 MB RAM, 1 vCPU, 20 GB SSD, 1 TB transfer
+  key_pair_name     = "turn-coturn" # existing key pair — must match or forces replacement
 
   tags = {
     Project    = "minicloud"
@@ -23,14 +24,10 @@ resource "aws_lightsail_instance" "coturn" {
   }
 }
 
-resource "aws_lightsail_static_ip" "coturn" {
-  name = "turn-coturn-ip"
-}
-
-resource "aws_lightsail_static_ip_attachment" "coturn" {
-  static_ip_name = aws_lightsail_static_ip.coturn.name
-  instance_name  = aws_lightsail_instance.coturn.name
-}
+# aws_lightsail_static_ip and aws_lightsail_static_ip_attachment do not support
+# import in the hashicorp/aws provider. The static IP "turn-coturn-ip"
+# (54.171.137.209) was attached manually and is reflected via
+# aws_lightsail_instance.coturn.public_ip_address (is_static_ip = true).
 
 # ── Firewall rules ────────────────────────────────────────────────────────────
 # TURN protocol: UDP/TCP 3478 (signalling + relay), UDP 49152–65535 (media relay).
@@ -72,7 +69,7 @@ resource "aws_lightsail_instance_public_ports" "coturn" {
 
 output "coturn_public_ip" {
   description = "Static public IP of the Lightsail TURN relay (turn.devandre.sbs)"
-  value       = aws_lightsail_static_ip.coturn.ip_address
+  value       = aws_lightsail_instance.coturn.public_ip_address
 }
 
 output "coturn_instance_name" {
@@ -80,7 +77,5 @@ output "coturn_instance_name" {
   value       = aws_lightsail_instance.coturn.name
 }
 
-# ── Import commands (run once to bring existing resources under OpenTofu) ─────
+# ── Import command (run once to bring existing instance under OpenTofu) ───────
 # tofu import aws_lightsail_instance.coturn turn-coturn-eu
-# tofu import aws_lightsail_static_ip.coturn turn-coturn-ip
-# tofu import aws_lightsail_static_ip_attachment.coturn turn-coturn-ip
