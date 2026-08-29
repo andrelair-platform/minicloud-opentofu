@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/andrelair-platform/minicloud-opentofu/compare/minicloud-opentofu-v0.1.1...minicloud-opentofu-v0.1.2) (2026-08-29)
+
+
+### Bug Fixes
+
+* **website:** correct sidebars.ts brace syntax ([ed3ebe4](https://github.com/andrelair-platform/minicloud-opentofu/commit/ed3ebe4c82e5de98f4e53c15a47f31cd24192207))
+
 ## [0.1.1](https://github.com/andrelair-platform/minicloud-opentofu/compare/minicloud-opentofu-v0.1.0...minicloud-opentofu-v0.1.1) (2026-08-14)
 
 
