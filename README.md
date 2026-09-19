@@ -5,7 +5,9 @@
 [![Live docs](https://img.shields.io/badge/docs-live-blue)](https://andrelair-platform.github.io/minicloud-platform-docs/)
 
 Codifies the **MAAS-managed infrastructure** for the minicloud
-cluster: cluster subnet, DHCP range, and the machines.
+cluster: cluster subnet, DHCP range, and five MAAS-managed machines. The sixth
+node, `swift-mac`, is represented in the complete inventory but deliberately
+kept outside MAAS lifecycle management because Apple EFI prevents PXE boot.
 
 This is the layer below Phase 10's Ansible roles. Ansible codifies what
 runs *on* a node; this OpenTofu codifies the MAAS-side state that makes a
@@ -51,8 +53,8 @@ opentofu/
   env.sh               # source-able: exports TF_VAR_maas_api_key from ~/.maas-api-key
   subnet.tf            # maas_subnet.cluster — 10.0.0.0/24
   ip_ranges.tf         # maas_subnet_ip_range.cluster_dhcp — 10.0.0.10..100
-  machines.tf          # maas_machine.cluster (for_each over 3 hosts)
-  outputs.tf           # subnet_id, machine inventory, set_hog_ip, fast_*_ip
+  machines.tf          # 5 MAAS resources + 1 explicitly non-MAAS node
+  outputs.tf           # MAAS inventory + complete six-node cluster inventory
   .gitignore           # .terraform/, *.tfstate, *.tfvars
 ```
 
@@ -90,8 +92,9 @@ tofu output     # subnet, machine inventory, per-host IPs
 
 ## Importing existing state
 
-Already done for the live cluster (state file `terraform.tfstate` is local
-and gitignored). For reference, the import commands were:
+State is local and gitignored, so verify every operational checkout before
+planning. If the MAAS resources are absent from `tofu state list`, import the
+existing live resources with:
 
 ```bash
 tofu import maas_subnet.cluster 3
@@ -99,6 +102,8 @@ tofu import maas_subnet_ip_range.cluster_dhcp 1
 tofu import 'maas_machine.cluster["set-hog"]'    nbc6cx
 tofu import 'maas_machine.cluster["fast-skunk"]' sby3w7
 tofu import 'maas_machine.cluster["fast-heron"]' q6m3px
+tofu import 'maas_machine.cluster["star-kitten"]' dr3cnm
+tofu import 'maas_machine.cluster["loving-gannet"]' shgybc
 ```
 
 The IDs (`3`, `1`, system_ids) come from `maas admin subnets read`,
@@ -134,8 +139,10 @@ the inventory:
 
 1. Stand up MAAS, log in, get a fresh API key.
 2. `source ./env.sh` (with the new key).
-3. `tofu apply` — creates subnet, IP range, and (importantly) registers the
-   3 machines by their PXE MAC addresses so they enlist when powered on.
+3. Replace the placeholder PXE MAC addresses in `machines.tf` with the real
+   NIC addresses before running `tofu apply`. The apply creates the subnet, IP
+   range, and registers the 5 MAAS-managed machines. `swift-mac` remains a
+   documented manual-provisioning exception.
 4. Re-import the resulting resources into the *original* state file if
    you're restoring rather than starting clean.
 
@@ -172,6 +179,9 @@ Run `tofu refresh` first to populate state with computed outputs, then
 
 * **k3s itself.** Phase 1's docs install k3s; Ansible's Phase 10 keeps the
   prereqs in shape. OpenTofu is for the layer below.
+* **The `swift-mac` operating-system lifecycle.** Apple EFI prevents MAAS PXE
+  provisioning. The node appears in `cluster_inventory`, but installation and
+  recovery remain manual; Ansible manages it after Ubuntu is running.
 * **Kubernetes resources.** That's helm-chart values files (Phases 5–9) and
   ArgoCD (Phase 12). Mixing IaC tools per layer keeps each focused.
 * **DNS records, fabrics, VLAN config.** MAAS already manages these and we
