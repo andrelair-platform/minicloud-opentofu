@@ -13,8 +13,9 @@ slug: /
 
 | In scope | Out of scope |
 |---|---|
-| MAAS machine definitions (4 ThinkPads + swift-mac) | OS configuration post-provision (minicloud-ansible) |
-| Static IP reservations (10.0.0.2–10.0.0.10) | k3s cluster bootstrap (minicloud-ansible) |
+| MAAS machine definitions (5 x86 nodes) | OS configuration post-provision (minicloud-ansible) |
+| Complete six-node inventory, including the explicit non-MAAS `swift-mac` exception | `swift-mac` OS installation (Apple EFI prevents PXE) |
+| Cluster IP mapping (10.0.0.2–10.0.0.10) | k3s cluster bootstrap (minicloud-ansible) |
 | MAAS subnets, DHCP, DNS | Helm values (minicloud-gitops) |
 | Machine power types (webhook BMC via Temporal) | |
 
@@ -35,7 +36,8 @@ slug: /
 | fast-skunk | 10.0.0.4 | i7-10510U | 16 GB | k3s worker |
 | fast-heron | 10.0.0.7 | i7-8565U | 32 GB | k3s worker |
 | star-kitten | 10.0.0.8 | i7-8565U | 32 GB | k3s worker |
-| swift-mac | 10.0.0.10 | i7-3615QM | 16 GB | k3s worker |
+| loving-gannet | 10.0.0.9 | x86_64 | — | k3s worker |
+| swift-mac | 10.0.0.10 | i7-3615QM | 16 GB | k3s worker — manual provisioning |
 
 ## Links
 
