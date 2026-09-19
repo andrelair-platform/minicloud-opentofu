@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.2](https://github.com/andrelair-platform/minicloud-opentofu/compare/minicloud-opentofu-v0.1.1...minicloud-opentofu-v0.1.2) (2026-09-19)
+
+
+### Bug Fixes
+
+* **ci:** upgrade release-please action ([c08cd47](https://github.com/andrelair-platform/minicloud-opentofu/commit/c08cd47629c85259713b317f770568b521fa8c87))
+* **ci:** upgrade release-please action ([2f72469](https://github.com/andrelair-platform/minicloud-opentofu/commit/2f7246914dba3fa2c8bd0d37d947fd94dc7d2b7a))
+* **iac:** align MAAS inventory with cluster nodes ([737b1e7](https://github.com/andrelair-platform/minicloud-opentofu/commit/737b1e77a6de7d18fa6590ad4e44ba29f5dedb98))
+* **iac:** align MAAS inventory with cluster nodes ([368ff87](https://github.com/andrelair-platform/minicloud-opentofu/commit/368ff873fb3ac1a5fc703d2f51ef3be49b317cfd))
+* **website:** correct sidebars.ts brace syntax ([2c3f8bd](https://github.com/andrelair-platform/minicloud-opentofu/commit/2c3f8bd24c1b137d51364a39385de4672ab284e3))
+* **website:** correct sidebars.ts brace syntax ([ed3ebe4](https://github.com/andrelair-platform/minicloud-opentofu/commit/ed3ebe4c82e5de98f4e53c15a47f31cd24192207))
+
 ## [0.1.1](https://github.com/andrelair-platform/minicloud-opentofu/compare/minicloud-opentofu-v0.1.0...minicloud-opentofu-v0.1.1) (2026-08-14)
 
 
